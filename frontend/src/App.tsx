@@ -4,23 +4,34 @@ import './App.css';
 import {Greet} from "../wailsjs/go/main/App";
 
 function App() {
-    const [resultText, setResultText] = useState("Please enter your name below 👇");
-    const [name, setName] = useState('');
-    const updateName = (e: any) => setName(e.target.value);
-    const updateResultText = (result: string) => setResultText(result);
+    const [resultText, setResultText] = useState("Hello!");
 
-    function greet() {
-        Greet(name).then(updateResultText);
-    }
+    type RenderMode = "raytrace" | "lightweight";
+    const [mode, setMode] = useState<RenderMode>("raytrace");  // annotate
+    const [busy, setBusy] = useState(false);
 
     return (
         <div id="App">
-            <img src={logo} id="logo" alt="logo"/>
-            <div id="result" className="result">{resultText}</div>
-            <div id="input" className="input-box">
-                <input id="name" className="input" onChange={updateName} autoComplete="off" name="input" type="text"/>
-                <button className="btn" onClick={greet}>Greet</button>
-            </div>
+            <div id="text" className="result">{mode}</div>
+            <label>
+                <input
+                    type="radio"
+                    name="mode"
+                    checked={mode === 'lightweight'}
+                    onChange={() => setMode("lightweight")}
+                />
+                Lightweight
+            </label>
+
+            <label>
+                <input
+                    type="radio"
+                    name="mode"
+                    checked={mode === 'raytrace'}
+                    onChange={() => setMode("raytrace")}
+                />
+                RayTrace
+            </label>
         </div>
     )
 }
