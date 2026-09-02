@@ -69,7 +69,7 @@ function App() {
             </div>
 
             <div id="perfomanceBox">
-                {elapsedTime && <div>{elapsedTime}</div>}
+                {elapsedTime !== null && <div>{elapsedTime.toFixed(0)+"ms"}</div>}
             </div>
         </div>
     )
